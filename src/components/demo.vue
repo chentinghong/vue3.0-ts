@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="demo">
     <p>插槽测试 #代替v-slot写法</p>
     <demo-child>
         <template #title>
@@ -38,6 +38,9 @@
     <p>父子组件之间v-model的运用</p>
     <p>父组件上的显示值：{{text}}</p>
     <demo-child v-model:text="text" />
+    <p style="font-size:1rem">1rem字体</p>
+    <p style="font-size:37.5px">37.5px字体</p>
+    <p class="t-rem">用class设置37.5px字体</p>
   </div>
 </template>
  
@@ -54,7 +57,6 @@ export default defineComponent({
   },
   setup(props,ctx) {
     const globalProperty :any=getCurrentInstance()
-    console.log(globalProperty.appContext.config.globalProperties,'全局信息')
     const provideData:Value=reactive<Value>({value:'这是接收值'})
     const text = ref<string>('')
     //将响应式参数传入provide中 完成注入响应式
@@ -68,4 +70,12 @@ export default defineComponent({
 </script>
  
 <style scoped lang = "less">
+/* 只有在class中写入尺寸单位才有效，在内敛样式中设置无效 */
+.t-rem{
+    font-size:37.5px;
+}
+.demo{
+    font-size: 0.5rem;
+    width: 100%;
+}
 </style>
