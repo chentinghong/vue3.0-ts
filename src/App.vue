@@ -1,11 +1,11 @@
 <template>
-  <Header ref="routeRef" :rightText="headInfo.rightText" :rightLink="headInfo.rightLink" :title="headInfo.title" :backStep="headInfo.backStep">
+  <Header :rightText="headInfo.rightText" :rightLink="headInfo.rightLink" :title="headInfo.title" :backStep="headInfo.backStep">
   </Header>
-  <router-view></router-view>
+  <router-view ref="routeRef"></router-view>
 </template>
 
 <script lang="ts">
-import { defineComponent,provide,reactive,ref,watch,toRefs } from 'vue'
+import { defineComponent,provide,reactive,ref,watch,getCurrentInstance } from 'vue'
 import Header from './components/common/header.vue'
 import { useRoute } from 'vue-router';
 interface RightHeaderInfo{
@@ -25,10 +25,15 @@ export default defineComponent({
       title:"首页",
       rightLink:"",
     })
+    const instance=getCurrentInstance()
     const routeRef=ref(null)
     const route=useRoute()
     watch(()=>route.path,()=>{
-      console.log(routeRef.value)
+      console.log('route变化执行时间'+Date.now())
+      headInfo.title = route.meta.title as string
+      headInfo.rightText = "";
+      headInfo.rightLink = "";
+      headInfo.backStep = null;
     })
     provide<RightHeaderInfo>('headInfo',headInfo)
     return {

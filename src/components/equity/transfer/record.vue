@@ -10,8 +10,9 @@ export default defineComponent({
   name: "record",
   setup() {
     const headInfo = inject("headInfo") as RightHeaderInfo;
+    console.log('组件setup函数执行时间'+Date.now())
     onMounted(()=>{
-       headInfo.title = "转让记录";
+      //  headInfo.title = "转让记录";
     })
    
     return {};

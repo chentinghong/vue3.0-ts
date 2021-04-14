@@ -103,17 +103,11 @@ export default defineComponent({
       rightLink: "/equity/record",
       backStep: -2,
     };
-    Object.assign(headInfo, head);
+    Object.assign(headInfo, head);//可以将proxy合并成proxy对象
     // headInfo.title = "我要转让";
     // headInfo.rightText = "转让记录";
     // headInfo.rightLink = "/equity/record";
     // headInfo.backStep = -2;
-    onUnmounted(() => {
-      headInfo.title = "";
-      headInfo.rightText = "";
-      headInfo.rightLink = "";
-      headInfo.backStep = null;
-    });
     function showDialog() {
       Dialog.alert({
         message: "累计提现金额，包括累计兑换商品金额",

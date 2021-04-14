@@ -12,8 +12,8 @@ const routes = [
     {
         path: '/equity/', component: Equity, children: [
             { path: 'transfer', component: Transfer },
-            { path: 'doTransfer', component: DoTransfer },
-            { path: 'record', component: Record },
+            { path: 'doTransfer', component: DoTransfer,meta:{title:'我要转让'} },
+            { path: 'record', component: Record,meta:{title:'转让记录'} },
             { path: 'risk', component: Risk },          
         ]
     },
