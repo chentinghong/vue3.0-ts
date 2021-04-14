@@ -1,14 +1,27 @@
-import { createWebHashHistory, createRouter } from 'vue-router'
+import { createWebHistory, createRouter } from 'vue-router'
 import Demo from '../components/demo.vue'
 import Index from '../components/index.vue'
+import Equity from '../components/equity/equity.vue'
+import Transfer from '../components/equity/transfer/transfer.vue'
+import DoTransfer from '../components/equity/transfer/doTransfer.vue'
+import Record from '../components/equity/transfer/record.vue'
+import Risk from '../components/equity/risk/risk.vue'
 const routes = [
     { path: '/', component: Index },
     { path: '/demo', component: Demo },
+    {
+        path: '/equity/', component: Equity, children: [
+            { path: 'transfer', component: Transfer },
+            { path: 'doTransfer', component: DoTransfer },
+            { path: 'record', component: Record },
+            { path: 'risk', component: Risk },          
+        ]
+    },
 ]
 
 const router = createRouter({
-    // 4. 内部提供了 history 模式的实现。为了简单起见，我们在这里使用 hash 模式。
-    history: createWebHashHistory(),
+    // 4. 内部提供了 history 模式的实现。
+    history: createWebHistory(),
     routes,
 })
 

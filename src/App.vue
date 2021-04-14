@@ -1,16 +1,18 @@
 <template>
-  <Header :rightText="rightHeader.rightText" :rightLink="rightHeader.rightLink" :title="rightHeader.title">
+  <Header ref="routeRef" :rightText="headInfo.rightText" :rightLink="headInfo.rightLink" :title="headInfo.title" :backStep="headInfo.backStep">
   </Header>
   <router-view></router-view>
 </template>
 
 <script lang="ts">
-import { defineComponent,provide,reactive } from 'vue'
+import { defineComponent,provide,reactive,ref,watch,toRefs } from 'vue'
 import Header from './components/common/header.vue'
+import { useRoute } from 'vue-router';
 interface RightHeaderInfo{
   rightText?:string|null,
   rightLink?:string|null,
   title?:string|null,
+  backStep?:number|null,
 }
 export default defineComponent({
   name: 'App',
@@ -18,14 +20,21 @@ export default defineComponent({
     Header
   },
   setup(){
-    const rightHeader=reactive<RightHeaderInfo>({
+    const headInfo=reactive<RightHeaderInfo>({
       rightText:"",
       title:"首页",
-      rightLink:""
+      rightLink:"",
     })
-    provide<RightHeaderInfo>('rightHeader',rightHeader)
+    const routeRef=ref(null)
+    const route=useRoute()
+    watch(()=>route.path,()=>{
+      console.log(routeRef.value)
+    })
+    provide<RightHeaderInfo>('headInfo',headInfo)
     return {
-      rightHeader
+      headInfo,
+      route,
+      routeRef
     }
   }
 })

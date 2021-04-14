@@ -1,7 +1,8 @@
 <template>
   <div>
     <div class="link">
-      <router-link to="/demo">Demo链接</router-link>
+      <router-link to="/demo">demo链接</router-link>
+      <router-link to="/equity/transfer">equity链接</router-link>
     </div>
   </div>
 </template>
